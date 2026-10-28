@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirma_SUS+ 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/recepcao.css' %}?v=1.0">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <img class="icon" src='{% static "images/coracao2.png" %}' alt="Ícone de coração">
+    </header>
+
+    <main class="conteudo">
+        <div class="tabela">
+            <section class="titulo">
+                <h3>Bem vindo ao Confirma_SUS+ 2.0</h3>
+            </section>
+            <div class="formulario">
+                <a href="{% url 'login_paciente' %}"><button>Login Paciente</button></a>
+                <a href="{% url 'login_medico' %}"><button>Área Médica</button></a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

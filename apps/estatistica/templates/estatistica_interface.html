@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirma_SUS+ 2.0</title>
+    <link rel="stylesheet" href={% static 'css/estatistica_interface.css' %}>
+</head>
+<body>
+
+    <header class="cabecalho">
+        <img class="icon" src='{% static "images/coracao.png" %}' alt="Ícone de coração">
+        <nav class="menu">
+            <a href="{% url 'exportar_excel' %}"><button class="btnnav">Exportar para Excel</button></a>
+            <a href="{% url 'recepcao' %}"><button class="btnnav-voltar">Voltar</button></a>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="conteudo">
+            <div class="tabela">
+                <section class="titulo">
+                    <h3>Relatório Consultas 2025</h3>
+                </section>
+                <div class="tabela-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mês</th>
+                                <th>Ofertadas</th>
+                                <th>Agendadas</th>
+                                <th>Realizadas</th>
+                                <th>Faltas</th>
+                                <th>Perda Primária</th>
+                                <th>Relação</th>
+                                <th>Absenteísmo</th>
+                                <th>Taxa de Ocupação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in tabela_interface %}
+                            <tr>
+                                <td>{{ i.meses }}</td>
+                                <td>{{ i.ofertada }}</td>
+                                <td>{{ i.agendada }}</td>
+                                <td>{{ i.compareceu }}</td>
+                                <td>{{ i.faltou }}</td>
+                                <td>{{ i.perda_primaria }}</td>
+                                <td>{{ i.relacao|floatformat:2 }}%</td>
+                                <td>{{ i.faltou_porcentagem|floatformat:2 }}%</td>
+                                <td>{{ i.taxa_ocupacao|floatformat:2 }}%</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Total</th>
+                                <td>{{ tabela_total.ofertada }}</td>
+                                <td>{{ tabela_total.agendada }}</td>
+                                <td>{{ tabela_total.compareceu }}</td>
+                                <td>{{ tabela_total.faltou }}</td>
+                                <td>{{ tabela_total.perda_primaria }}</td>
+                                <td>{{ tabela_total.relacao|floatformat:2 }}%</td>
+                                <td>{{ tabela_total.faltou_porcentagem|floatformat:2 }}%</td>
+                                <td>{{ tabela_total.taxa_ocupacao|floatformat:2 }}%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="tabela">
+                <section class="titulo">
+                    <h3>Setor de Presença e Absenteísmo</h3>
+                </section>
+                <div class="graficos-na-mesma-linha">    
+                    <img class="grafico-item" src="data:image/png;base64,{{ grafico_agendada }}">
+                    <img class="grafico-item" src="data:image/png;base64,{{ grafico_compareceu }}">
+                </div>  
+                <div class="graficos-na-mesma-linha">
+                    <img class="grafico-item" src="data:image/png;base64,{{ grafico_faltou }}">
+                    <img class="grafico-item" src="data:image/png;base64,{{ grafico_absenteismo }}">
+                </div>
+            </div>
+            <div class="tabela">
+                <section class="titulo">
+                    <h3>Setor de Eficiência</h3>
+                </section>
+                <div class="graficos-na-mesma-linha">    
+                    <img class="grafico-item" src="data:image/png;base64,{{ grafico_ofertada }}">
+                    <img class="grafico-item" src="data:image/png;base64,{{ grafico_perda_primaria }}">
+                </div>  
+                <div class="graficos-na-mesma-linha">
+                    <img class="grafico-item" src="data:image/png;base64,{{ grafico_relacao }}">
+                    <img class="grafico-item" src="data:image/png;base64,{{ grafico_taxa_ocupacao }}">
+                </div>
+            </div>
+            <div class="tabela">
+                <section class="titulo">
+                    <h3>Total</h3>
+                </section>
+                <div class="graficos-na-mesma-linha">    
+                    <img class="grafico-item" src="data:image/png;base64,{{ grafico_total }}">
+                    <img class="grafico-item" src="data:image/png;base64,{{ grafico_pizza }}">
+                </div>  
+            </div>
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+
+</body>
+</html>

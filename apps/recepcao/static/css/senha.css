@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #e2e2e2;
+}
+
+.cabecalho {
+    background:linear-gradient(90deg, #1B2BB6, #5e00ab); 
+    padding-bottom: 20px;
+    padding-top: 20px;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-around;
+    box-shadow: 0px 0 10px rgba(0, 0, 0, 1);
+}
+
+
+.menu {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+.btnnav-voltar {
+    padding: 10px;
+    background-color: #f7f5f0;
+    border: none;
+    border-radius: 14px;
+    color: #000000;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.icon {
+    max-width: 60px;
+    width: 8%;
+}
+
+.conteudo {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.erro {
+    font-size: 25px;
+    color: red;
+}
+
+.form-div {
+    max-height:300px;
+    height: 100%;
+    min-height:200px;
+    width: 95%;
+    max-width: 800px;
+    border-radius: 14px;
+    background-color: #f7f5f0;
+    box-shadow: 0px 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.titulo {
+    text-align: center;
+    padding: 16px;
+    background: linear-gradient(90deg, #1B2BB6, #5e00ab); 
+    font-size: 30px;
+    color: #ffffff;   
+}
+
+.formulario {
+    padding-bottom: 2px;
+    padding: 15px;
+    position: relative;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 20px;
+    display: block;
+    color: #000000;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 8px;
+    border: 1px solid #1B2BB6;
+    border-radius: 10px;
+}
+
+.recuperar {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background-color: #1B2BB6;
+    border: none;
+    border-radius: 14px;
+    color: #e2e2e2;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.recuperar:hover {
+    background-color: #162291;
+    transition: 1s;
+}

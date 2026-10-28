@@ -1,0 +1,4 @@
+Django==5.2.7
+matplotlib==3.11.2
+openpyxl==3.1.5
+python-decouple==3.8

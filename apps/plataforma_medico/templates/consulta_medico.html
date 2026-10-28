@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirma_SUS+ 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/consulta_medico.css' %}?v=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    
+    <header class="cabecalho">
+        <img class="icon" src='{% static "images/coracao.png" %}' alt="Ícone de coração">
+        <nav class="menu">
+            <a class="nome">Dr(a).{{ consulta.medico.user.get_full_name }}</a>
+            <a href="{% url 'plataforma_medico' %}"><button class="btnnav-voltar">Voltar</button></a>
+        </nav>
+    </header>
+
+    <main class="conteudo">
+        <div class="tabela">
+            <section class="titulo">
+                <h3>Dados da Consulta</h3>
+            </section>
+            <div>
+                <form class="formulario" method="POST">
+                    {% csrf_token %}
+                    <label>Paciente</label>
+                    <input readonly value="{{ consulta.paciente.user.get_full_name }}">
+                    <label>Data</label>
+                    <input readonly value="{{ consulta.data_hora|date:'d/m/Y' }}">
+                    <label>Horário</label>
+                    <input readonly value="{{ consulta.data_hora|time:'H:i' }}">
+                    <label>Retorno ou primeira consulta</label>
+                    <input readonly value="{{consulta.get_consulta_status_retorno_display}}">
+                    <div class="btn">
+                        <button type="button" class="btncompareceu" id="btncompareceu" consulta-id="{{ consulta.id }}">Paciente Compareceu</button>
+                        <button type="button" class="btnfaltou" id="btnfaltou" consulta-id="{{ consulta.id }}">Paciente Faltou</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="{% static 'js/consulta_medico.js' %}"></script>
+
+</body>
+</html>

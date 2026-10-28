@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirma_SUS+ 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/plataforma.css' %}?v=1.0">
+</head>
+<body>
+    
+    <header class="cabecalho">
+        <img class="icon" src='{% static "images/coracao.png" %}' alt="Ícone de coração">
+        <nav class="menu">
+            <a class="nome">{{ paciente.user.get_full_name }}</a>
+            <a href="{% url 'marcar_consulta' %}"><button class="btnnav">Marcar Consulta</button></a>
+            <a href="{% url 'perfil' %}"><button class="btnnav">Perfil</button></a>
+            <a href="{% url 'logout' %}"><button class="btnnav-sair">Sair</button></a>
+        </nav>
+    </header>
+
+    <main class="conteudo">
+        <div class="tabela">
+            <section class="titulo">
+                <h3>Minhas Consultas</h3>
+            </section>
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Médico</th>
+                            <th>Especialidade</th>
+                            <th>Data</th>
+                            <th>Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in consulta %}
+                        <tr onclick="window.location.href='{% url 'consulta_interface' i.id %}'" style="cursor: pointer;">
+                                <td>{{ i.medico.user.get_full_name }}</td>
+                                <td>{{ i.medico.especialidade }}</td>
+                                <td>{{ i.data_hora|date:"d/m/Y" }}</td>
+                                <td>{{ i.data_hora|time:"H:i" }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4">Nenhuma consulta marcada.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>                    
+                </table>
+            </div>
+        </div>
+    </main>    
+
+    <footer class="rodape">
+        <p>Para confirmar presença na unidade, cancelar, reagendar ou checar endereço da consulta, selecione um item da tabela</p>
+    </footer>
+    
+</body>
+</html>

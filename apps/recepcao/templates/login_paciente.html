@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirma_SUS+ 2.0</title>
+    <link rel="stylesheet" href="{% static "css/login.css" %}?v=1.0">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <img class="icon" src='{% static "images/coracao.png" %}' alt="Ícone de coração">
+        <nav class="menu">
+            <a href="{% url 'recepcao' %}"><button class="btnnav-voltar">Voltar</button></a>
+        </nav>
+    </header>
+        
+    <main class="conteudo">
+        <div class="formulario-div">
+            <section class="titulo">
+                <h3>Digite CPF e Senha para efetuar Login</h3>
+            </section>
+            <form class="formulario" action="{% url 'login_paciente' %}" method="POST" class="formulario"> {% csrf_token %}
+                {% if status == "1" %}
+                    <p class="erro">*CPF ou Senha inválidos</p>
+                {% endif %}
+                <label for="cpf">CPF:</label> 
+                <input name="cpf" type="text" id="cpf" placeholder="000.000.000-00" maxlength="14">
+                <input type="hidden" name="cpf_sem_formatacao" id="cpf_sem_formatacao">
+                <label for="senha">Senha:</label>
+                <input name="senha" type="password" id="senha" placeholder="Digite sua Senha" maxlength="128">
+                <div class="esqueci_senha">
+                    <a href="{% url 'senha' %}">Esqueci minha senha</a>
+                </div>
+                <button class="btnlogin" type="submit">Login</button>
+            </form>
+        </div>    
+    </main>   
+    
+    <script src='{% static "js/cpf.js" %}'></script>
+
+</body>
+</html>

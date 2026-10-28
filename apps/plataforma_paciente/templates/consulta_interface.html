@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirma_SUS+ 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/consulta.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <header class="cabecalho">
+        <img class="icon" src='{% static "images/coracao.png" %}' alt="Ícone de coração">
+        <nav class="menu">
+            <a class="nome">{{ consulta.paciente.user.get_full_name }}</a>
+            <a href="{% url 'plataforma_paciente' %}"><button class="btnnav-voltar">Voltar</button></a>
+        </nav>
+    </header>
+    
+    <main class="conteudo">
+        <div class="tabela">
+            <section class="titulo">
+                <h3>Dados da Consulta</h3>
+            </section>
+            <form class="formulario" method="POST">
+                {% csrf_token %}
+                <label>Médico</label>
+                <input readonly value="{{ consulta.medico.user.get_full_name }}">
+                <label>Especialidade</label>
+                <input readonly value="{{ consulta.medico.especialidade }}">
+                <label>Data</label>
+                <input readonly value="{{ consulta.data_hora|date:'d/m/Y' }}">
+                <label>Horário</label>
+                <input readonly value="{{ consulta.data_hora|time:'H:i' }}">
+                <label>Local</label>
+                <input readonly value="{{ consulta.local }}">
+                <label>Endereço</label>
+                <input readonly value="{{ consulta.endereco }}">
+                <div class="btn">
+                    <button type="button" class="btnconfirmar" id="btnconfirmar" consulta-id="{{ consulta.id }}">Confirmar Presença</button>
+                    <button type="button" class="btncancelar" id="btncancelar" consulta-id="{{ consulta.id }}">Cancelar Consulta</button>
+                    <button type="button" class="btnreagendar" id="btnreagendar" onclick="window.location.href='{% url 'reagendar' consulta.id %}'">Reagendar Consulta</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="{% static 'js/consulta.js' %}"></script>
+    
+</body>
+</html>

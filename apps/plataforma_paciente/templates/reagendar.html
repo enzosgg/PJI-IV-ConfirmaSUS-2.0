@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirma_SUS+ 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/reagendar.css' %}?v=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <header class="cabecalho">
+        <img class="icon" src='{% static "images/coracao.png" %}' alt="Ícone de coração">
+        <nav class="menu">
+            <a class="nome">{{ consulta.paciente.user.get_full_name }}</a>
+            <a href="{% url 'consulta_interface' consulta.id %}"><button class="btnnav-voltar">Voltar</button></a>
+        </nav>
+    </header>
+
+    <main class="conteudo">
+        <div class="tabela">
+            <section class="titulo">
+                <h3>Consultas disponíveis para reagendamento</h3>
+            </section>
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Médico</th>
+                            <th>Especialidade</th>
+                            <th>Local</th>
+                            <th>Endereço</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in consulta_disponivel %}
+                        <tr consulta-disponivel-id="{{ i.id }}" style="cursor: pointer;">
+                            <td>{{ i.data_hora|date:"d/m/Y" }}</td>
+                            <td>{{ i.data_hora|time:"H:i" }}</td>
+                            <td>{{ i.medico.user.get_full_name }}</td>
+                            <td>{{ i.medico.especialidade }}</td>
+                            <td>{{ i.local }}</td>
+                            <td>{{ i.endereco }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr class="nao-clicavel">
+                            <td colspan="6">Nenhuma consulta disponível para reagendamento.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <p>Para reagendamento selecione um item da tabela.</p>
+    </footer>
+
+    <input type="hidden" id="consulta-id" value="{{ consulta.id }}">
+
+    <script src="{% static 'js/reagendar.js' %}?v=1.0"></script>
+
+</body>
+</html>

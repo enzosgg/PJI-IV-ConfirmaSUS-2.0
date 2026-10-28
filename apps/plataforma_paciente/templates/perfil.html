@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirma_SUS+ 2.0</title>
+    <link rel="stylesheet" href="{% static 'css/perfil.css' %}?v=1.0">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <img class="icon" src='{% static "images/coracao.png" %}' alt="Ícone de coração">
+        <nav class="menu">
+            <a class="nome">{{ paciente.user.get_full_name }}</a>
+            <a href="{% url 'plataforma_paciente' %}"><button class="btnnav-voltar">Voltar</button></a>
+        </nav>
+    </header>
+
+    <main class="conteudo">
+        <div class="tabela">
+            <section class="titulo">
+                <h3>Dados do Perfil</h3>
+            </section>
+            <form class="formulario" method="post" action="{% url 'perfil' %}"> {% csrf_token %}
+                <label for="telefone">Número de telefone:</label>
+                <input type="tel" id="telefone" name="telefone" value="{{ paciente.telefone }}" maxlength="11">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ paciente.user.email }}" maxlength="128">
+                <button class="btnconfirmar" type="submit">Confirmar</button>
+            </form>
+        </div>
+    </main>
+    
+</body>
+</html>
